@@ -119,9 +119,6 @@ def dijkstra(aGraph, start, target):
                 else:
                     print 'not updated : current = %s next = %s new_dist = %s' \
                             %(current.get_id(), next.get_id(), next.get_distance())
-                if next.get_id() == target.get_id():
-                    flag = 1
-                    break
 
             # Rebuild heap
             # 1. Pop every item
@@ -131,10 +128,6 @@ def dijkstra(aGraph, start, target):
             unvisited_queue = [(v.get_distance(),v) for v in aGraph if not v.visited]
             heapq.heapify(unvisited_queue)
 
-            if flag == 1:
-                break
-    print 'Total cost: %d' %(new_dist)
-    
 if __name__ == '__main__':
 
     g = Graph()
@@ -158,23 +151,6 @@ if __name__ == '__main__':
     g.add_edge('e', 'f', 4)
     g.add_edge('f', 'g', 3)
 
-    # g.add_vertex('a')
-    # g.add_vertex('b')
-    # g.add_vertex('c')
-    # g.add_vertex('d')
-    # g.add_vertex('e')
-    # g.add_vertex('f')
-
-    # g.add_edge('a', 'b', 7)  
-    # g.add_edge('a', 'c', 9)
-    # g.add_edge('a', 'f', 14)
-    # g.add_edge('b', 'c', 10)
-    # g.add_edge('b', 'd', 15)
-    # g.add_edge('c', 'd', 11)
-    # g.add_edge('c', 'f', 2)
-    # g.add_edge('d', 'e', 6)
-    # g.add_edge('e', 'f', 9)
-
     print 'Graph data:'
     for v in g:
         for w in v.get_connections():
@@ -182,6 +158,7 @@ if __name__ == '__main__':
             wid = w.get_id()
             print '( %s , %s, %3d)'  % ( vid, wid, v.get_weight(w))
 
+    # input source and destination
     src = raw_input('Insert Source: ')
     dest = raw_input('Insert Destination: ')
 
@@ -191,3 +168,4 @@ if __name__ == '__main__':
     path = [target.get_id()]
     shortest(target, path)
     print 'The shortest path : %s' %(path[::-1])
+    print 'Total cost : %s' %(target.get_distance())
